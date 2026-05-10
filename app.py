@@ -4,6 +4,12 @@ from langchain_core.messages import HumanMessage
 
 st.set_page_config(page_title="SynapseFlow - Chatbot", page_icon="🤖", layout="wide")
 
+# Inisialisasi Session State (Sangat Penting: Lakukan di awal agar tidak error di Sidebar)
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+if "thread_id" not in st.session_state:
+    st.session_state.thread_id = "konsultan_sesi_1"
+
 # Muat CSS
 with open("style.css") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
@@ -37,7 +43,7 @@ st.markdown("""
 
 with st.sidebar:
     st.image("https://img.icons8.com/fluency/100/ffffff/brain.png", width=100)
-    st.title("SynapseFlow Hub")
+    st.title("SynapseFlow - Chatbot")
     
     st.subheader("🔑 Autentikasi")
     api_key = st.text_input("Google AI API Key", type="password", placeholder="AIzaSy...")
@@ -68,7 +74,33 @@ with st.sidebar:
         st.caption("Anda dapat menyalin teks langsung dari gelembung chat.")
 
     st.markdown("---")
-    st.caption("v1.2 | Powered by Gemini AI")
+    
+    # Inovasi 3: Live Process Stepper
+    st.subheader("📊 Progress Konsultasi")
+    
+    # Deteksi progress berdasarkan pesan
+    all_content = " ".join([m["content"] for m in st.session_state.messages])
+    steps = [
+        ("🔍 Identifikasi Divisi", "Divisi" in all_content or "divisi" in all_content),
+        ("🧠 Analisis Masalah", "Analisis" in all_content or "analisis" in all_content),
+        ("✍️ Rumusan Prompt", "[Persona]" in all_content),
+        ("📚 Panduan Pelatihan", "Pelatihan" in all_content or "Staf" in all_content or "staf" in all_content)
+    ]
+    
+    for label, completed in steps:
+        icon = "✅" if completed else "⏳"
+        color = "var(--accent-color)" if completed else "var(--sidebar-text)"
+        st.markdown(f'<div style="color: {color}; font-size: 0.9rem; margin-bottom: 5px;">{icon} {label}</div>', unsafe_allow_html=True)
+
+    st.markdown("---")
+    st.caption("v1.3 | Powered by Gemini AI")
+
+def highlight_anatomy(text):
+    # Inovasi 4: Smart Anatomy Highlighting
+    tags = ["[Persona]", "[Task]", "[Context]", "[Format]", "[Tone]", "[Constraints/Exemplar]"]
+    for tag in tags:
+        text = text.replace(tag, f'<span class="anatomy-tag">{tag}</span>')
+    return text
 
 if not api_key:
     st.stop()
@@ -84,9 +116,32 @@ chat_container = st.container()
 with chat_container:
     for msg in st.session_state.messages:
         with st.chat_message(msg["role"]):
-            st.markdown(msg["content"])
+            if msg["role"] == "assistant":
+                if "---" in msg["content"]:
+                    # Inovasi 1: Complexity Badge (Visual Depth Meter)
+                    st.markdown('<div class="workflow-badge">Depth: Advanced Analysis</div>', unsafe_allow_html=True)
+                # Inovasi 4: Tampilkan dengan Highlighting
+                content = highlight_anatomy(msg["content"])
+                st.markdown(content, unsafe_allow_html=True)
+            else:
+                st.markdown(msg["content"])
+
+# Inovasi 2: Interactive Quick-Action Chips
+st.markdown('<div style="margin-top: 2rem;"></div>', unsafe_allow_html=True)
+cols = st.columns([1, 1, 1, 1])
+quick_actions = [
+    ("📋 HR Audit", "Analisis inefisiensi di divisi HR kami."),
+    ("🚀 Marketing", "Buat prompt untuk optimasi konten marketing."),
+    ("🛠️ Operations", "Otomatisasi alur kerja approval inventaris."),
+    ("🧠 Brainstorm", "Ide penggunaan AI untuk efisiensi tim.")
+]
 
 user_input = st.chat_input("Deskripsikan divisi dan masalah operasional Anda...")
+
+# Handle Quick Actions
+for i, (label, prompt) in enumerate(quick_actions):
+    if cols[i].button(label, use_container_width=True):
+        user_input = prompt
 
 if user_input:
     # 1. Tampilkan input pengguna

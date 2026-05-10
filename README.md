@@ -10,6 +10,16 @@
 
 ---
 
+## 🎯 Target Pengguna & Solusi
+
+**Target Pengguna:**
+Staf operasional, pembuat konten, dan pemasar pada agensi kreatif, perusahaan media, dan rintisan teknologi. Pengguna membutuhkan efisiensi kerja melalui AI tetapi kurang menguasai teknik rekayasa prompt.
+
+**Solusi Sistem:**
+SynapseFlow mendiagnosis hambatan alur kerja secara proaktif. Sistem merumuskan prompt AI presisi berstandar industri. Solusi ini memangkas waktu eksperimen AI pengguna dan mencetak output kerja secara cepat dan akurat.
+
+---
+
 ## 🚀 Fitur Utama
 
 * **Diagnostic-First Approach**: Chatbot tidak langsung memberikan jawaban. Ia akan melakukan diagnosis terstruktur terhadap divisi dan hambatan operasional Anda untuk memastikan solusi yang tepat sasaran.

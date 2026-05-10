@@ -1,0 +1,16 @@
+/* Mengatur latar belakang aplikasi (Navy Pekat) */
+.stApp {
+    background-color: #010030;
+    color: #FFFFFF;
+}
+
+/* Mengubah tampilan kotak input chat */
+.stChatInput {
+    border: 1px solid #7226FF;
+    border-radius: 10px;
+}
+
+/* Mewarnai gelembung obrolan pengguna (Magenta) dan bot (Cyan) */
+.stChatMessage[data-testid="stChatMessage"][data-baseweb="block"] {
+    background: linear-gradient(90deg, #F042FF 0%, #7226FF 100%);
+}

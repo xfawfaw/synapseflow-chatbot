@@ -67,7 +67,4 @@ AI Enthusiast
 
 Proyek ini disusun sebagai Final Project untuk program "LLM-Based Tools and Gemini API Integration for Data Scientists" oleh Hacktiv8.
 
-
-### Tips Tambahan untuk GitHub:
-1.  **Tangkapan Layar**: Pastikan Anda mengunggah file gambar hasil *screenshot* ke repositori Anda (misalnya di folder `img/`), lalu ganti baris teks di bawah judul dengan tag gambar: `![SynapseFlow UI](img/screenshot.png)`.
-2.  **Link Live Demo**: Tambahkan baris `[🔗 Live Demo di Streamlit Cloud](https://synapseflow-chatbot.streamlit.app/)` tepat di bawah *tagline* agar penilai bisa langsung mencoba aplikasi Anda.
+**Link Live Demo**: Tambahkan baris `[🔗 Live Demo di Streamlit Cloud](https://synapseflow-chatbot.streamlit.app/)`
